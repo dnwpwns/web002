@@ -26,20 +26,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>간단한 페이지</title>
+    <title>클릭 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            margin: 0;
+        }
+        #clickButton {
+            padding: 20px 40px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+        #score {
+            font-size: 36px;
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>환영합니다!</h1>
-    </header>
 
-    <main>
-        <p>이것은 간단한 HTML 예시입니다. 웹 페이지를 만드는 법을 배우고 있습니다.</p>
-        <p>더 많은 정보는 <a href="https://www.example.com" target="_blank">여기</a>에서 확인하세요.</p>
-    </main>
+    <button id="clickButton">클릭하세요!</button>
+    <span id="score">점수: 0</span>
 
-    <footer>
-        <p>&copy; 2025 나의 웹사이트</p>
-    </footer>
+    <script>
+        let score = 0;
+        const clickButton = document.getElementById('clickButton');
+        const scoreDisplay = document.getElementById('score');
+
+        clickButton.addEventListener('click', function() {
+            score++;
+            scoreDisplay.textContent = `점수: ${score}`;
+        });
+    </script>
+    
 </body>
 </html>
+
