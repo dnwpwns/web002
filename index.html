@@ -26,48 +26,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>클릭 게임</title>
+    <title>추적 게임</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f7f7f7;
             margin: 0;
+            background-color: #f4f4f9;
+            flex-direction: column;
         }
-        #clickButton {
-            padding: 20px 40px;
-            font-size: 24px;
-            cursor: pointer;
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+        }
+
+        .score {
+            font-size: 1.5em;
+            margin: 20px;
+        }
+
+        .circle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
             background-color: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #f44336;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
         }
-        #score {
-            font-size: 36px;
-            margin-left: 20px;
+
+        button:hover {
+            background-color: #d32f2f;
         }
     </style>
 </head>
 <body>
 
-    <button id="clickButton">클릭하세요!</button>
-    <span id="score">점수: 0</span>
+    <h1>추적 게임에 도전하세요!</h1>
+    <div class="score">점수: <span id="score">0</span></div>
+    <div class="circle" onclick="moveCircle()"></div>
+
+    <button onclick="resetGame()">게임 재시작</button>
 
     <script>
         let score = 0;
-        const clickButton = document.getElementById('clickButton');
-        const scoreDisplay = document.getElementById('score');
 
-        clickButton.addEventListener('click', function() {
+        // 원을 랜덤 위치로 이동시키는 함수
+        function moveCircle() {
             score++;
-            scoreDisplay.textContent = `점수: ${score}`;
-        });
+            document.getElementById('score').innerText = score;
+
+            // 원의 새로운 위치를 화면 내에서 랜덤하게 설정
+            const circle = document.querySelector('.circle');
+            const maxWidth = window.innerWidth - 100; // 화면 너비에서 원 크기만큼 빼기
+            const maxHeight = window.innerHeight - 100; // 화면 높이에서 원 크기만큼 빼기
+
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * maxHeight);
+
+            circle.style.left = randomX + 'px';
+            circle.style.top = randomY + 'px';
+        }
+
+        // 게임을 재시작하는 함수
+        function resetGame() {
+            score = 0;
+            document.getElementById('score').innerText = score;
+            moveCircle(); // 원을 처음 위치로
+        }
+
+        // 게임 시작 시 원을 랜덤 위치에 놓기
+        window.onload = function() {
+            moveCircle();
+        };
     </script>
-    
+
 </body>
 </html>
-
